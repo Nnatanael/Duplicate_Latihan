@@ -21,5 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('Create','App\Http\Controllers\DatadiriController@store');// insert
 
 Route::get('View','App\Http\Controllers\DatadiriController@view');
-Route::put('Update/{cari}','App\Http\Controllers\DatadiriController@update');
-Route::delete('Delete/{cari}','App\Http\Controllers\DatadiriController@destroy');
+Route::post('Update','App\Http\Controllers\DatadiriController@update');
+Route::post('Delete','App\Http\Controllers\DatadiriController@destroy');
+Route::post('Find','App\Http\Controllers\DatadiriController@find');

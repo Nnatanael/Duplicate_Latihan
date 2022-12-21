@@ -29,18 +29,22 @@ class DatadiriController extends Controller
     public function store(Request $request){
         $storeData = $request->all();
         $validate = Validator::make($storeData,[
-            'nama'  => 'required',       
-            'email' => 'required|email:rfc,dns',
+            'userName'  => 'required',       
+            'userEmail' => 'required',
         ]);
 
-        if($validate->fails())              
+        if($validate->fails())   
+                       
             return response(['message' => $validate->errors()],400);
 
-
-        $result = Data_Crud::create($storeData);
+        $result = Data_Crud::insert([
+            'nama' => $storeData['userName'],
+            'email' => $storeData['userEmail'],
+            ]);
         return response([
             'message' => 'Add Data Success',
             'data' => $result,
+            'status' => 200
         ],200);
     }
 
@@ -63,11 +67,30 @@ class DatadiriController extends Controller
         ],404);
     }
 
+    //Find Data//
+    public function find(Request $request)
+    {
+    
+        $data = Data_Crud::find($request['userId']);
+        if(!is_null($data)) {
+            return response([
+                'message' => 'Retrive Menu Success',
+                'data' => $data,
+                'status' => 200
+            ], 200);
+        }
+
+        return response([
+            'message' => 'Data Not Found',
+            'data' => null
+        ], 404);
+
+    }
     
     //Update Data//
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
-        $data = Data_Crud::find($id);
+        $data = Data_Crud::find($request['userId']);
         if(is_null($data)) {
             return response([
                 'message' => 'data Not Found',
@@ -77,21 +100,19 @@ class DatadiriController extends Controller
 
         $updateData = $request->all();
         $validate = Validator::make($updateData, [
-            'nama' => 'required',
-            'email' => 'required',
+            'userId' => 'required',
+            'userEmail' => 'required',
         ]);
 
         if($validate->fails())
             return response(['message' => $validate->errors()], 400);
 
-        $data->nama = $updateData['nama'];
-        $data->email = $updateData['email'];
-    
-
+        $data->email = $updateData['userEmail'];
         if($data->save()) { 
             return response([
                 'message' => 'Update Data Success',
-                'data' => $data
+                'data' => $data,
+                'status' => 200
             ], 200);
         }
         return response([
@@ -102,21 +123,23 @@ class DatadiriController extends Controller
 
 
     //Delete Data//
-    public function destroy($cari)
+    public function destroy(Request $cari)
     {
-        $data = Data_Crud::where('id','like',$cari,'or','nama','like','%'.$cari.'%');
+        $data = Data_Crud::find($cari['userId']);;
 
         if(is_null($data)) {
             return response([
-                'message' => 'Data Not Found',
-                'data' => null
+                'message' => $data,
+                'data' => $data
             ], 404);
         }
 
-        if($data->delete()) {
+        else {
+            $data->delete();
             return response([
                 'message' => 'Delete Data Success',
                 'data' => $data,
+                'status' => 200
             ], 200);
         }
         return response([
