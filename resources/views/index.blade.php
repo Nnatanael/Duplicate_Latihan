@@ -114,7 +114,7 @@
         });
     };
 
-    const viewData = () => {
+    function viewData(){
         saveBtn.show();
         updateBtn.hide();
         cancelBtn.hide();
@@ -147,7 +147,7 @@
         })
     }
 
-    const saveData = () => {
+    function saveData(){
         const userName = $('#userName').val();
         const userEmail = $('#userEmail').val();
         const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -181,7 +181,7 @@
         })
     }
 
-    const editData = (userId) => {
+    function editData(userId) {
         ajaxSetup();
         $.ajax({
             url: "http://127.0.0.1:8000/api/Find",
@@ -206,7 +206,7 @@
         })
     }
 
-    const update = () => {
+    function update(){
         const userId = globalUserId
         const userEmail = $('#userEmail').val();
         const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -261,11 +261,11 @@
         });
     }
 
-    const cancel = () => {
+    function cancel(){
         viewData()
     }
 
-    const deleteData = (userId) => {
+    function deleteData(userId){
         swal("Are You Sure Want to Delete Data?", {
             icon: 'warning',
             buttons: {
