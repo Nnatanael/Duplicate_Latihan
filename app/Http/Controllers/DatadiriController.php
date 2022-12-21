@@ -25,12 +25,12 @@ class DatadiriController extends Controller
      * @return \Illuminate\Http\Response
      */
    
-     //Create Data//
+     //~~~~~Create Data~~~~~//
     public function store(Request $request){
         $storeData = $request->all();
         $validate = Validator::make($storeData,[
             'userName'  => 'required',       
-            'userEmail' => 'required',
+            'userEmail' => 'required|email:rfc,dns',
         ]);
 
         if($validate->fails())   
@@ -48,7 +48,7 @@ class DatadiriController extends Controller
         ],200);
     }
 
-    //View Data//
+    //~~~~~View Data~~~~~~//
     public function view()
     {
     
@@ -67,7 +67,7 @@ class DatadiriController extends Controller
         ],404);
     }
 
-    //Find Data//
+    //~~~~~Find Data~~~~~~//
     public function find(Request $request)
     {
     
@@ -87,7 +87,7 @@ class DatadiriController extends Controller
 
     }
     
-    //Update Data//
+    //~~~~~~Update Data~~~~~~//
     public function update(Request $request)
     {
         $data = Data_Crud::find($request['userId']);
@@ -101,7 +101,7 @@ class DatadiriController extends Controller
         $updateData = $request->all();
         $validate = Validator::make($updateData, [
             'userId' => 'required',
-            'userEmail' => 'required',
+            'userEmail' => 'required|email:rfc,dns',
         ]);
 
         if($validate->fails())
