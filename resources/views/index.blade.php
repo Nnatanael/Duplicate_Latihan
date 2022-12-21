@@ -68,13 +68,13 @@
                     <table id="tableData" class="table table-sm table-bordered dataTable no-footer" aria-describedby="tableData_info">
                         <thead>
                         <tr>
-                            <th class="sorting" tabindex="0" aria-controls="tableData" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 252.016px;">
+                            <th class="sorting" tabindex="0" >
                                  Name
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="tableData" rowspan="1" colspan="1" aria-label="email: activate to sort column ascending" style="width: 240.523px;">
+                            <th class="sorting" tabindex="0" >
                                  email
                             </th>
-                            <th class="sorting" tabindex="0" aria-controls="tableData" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 269.461px;">
+                            <th class="sorting" tabindex="0" >
                                 Action
                             </th>
                         </tr>
